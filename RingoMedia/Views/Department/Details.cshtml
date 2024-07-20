@@ -1,0 +1,43 @@
+﻿@using DepartmentModule.DTOs
+@model DepartmentDto
+
+<h2>Edit Department</h2>
+<a asp-action="Edit" asp-asp-controller="Department" asp-route-id="@Model.Id">Edit</a>
+
+<div>
+    @if (!string.IsNullOrEmpty(Model.Logo))
+    {
+        <img src="data:image/png;base64,@Model.Logo" alt="Department Logo" />
+    }
+    else
+    {
+        <p>No logo available</p>
+    }
+
+    <h4>Parent Department:</h4>
+    @if (Model.ParentDepartment != null)
+    {
+        <a asp-action="Details" asp-route-id="@Model.ParentDepartment.Id">@Model.ParentDepartment.Name</a>
+    }
+    else
+    {
+        <p>No parent department</p>
+    }
+
+    <h4>Sub-Departments:</h4>
+    <ul>
+        @if (Model.SubDepartments != null && Model.SubDepartments.Any())
+        {
+            @foreach (var subDept in Model.SubDepartments)
+            {
+                <li>
+                    <a asp-action="Details" asp-route-id="@subDept.Id">@subDept.Name</a>
+                </li>
+            }
+        }
+        else
+        {
+            <p>No sub-departments</p>
+        }
+    </ul>
+</div>

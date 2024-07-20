@@ -1,0 +1,12 @@
+﻿@using DepartmentModule.DTOs
+@model IEnumerable<DepartmentDto>
+<h2>Departments</h2>
+<a href="/Department/Create">Create New</a>
+<ul>
+    @foreach (var department in Model)
+    {
+        <li>
+            <a href="/Department/Details/@department.Id">@department.Name</a>
+        </li>
+    }
+</ul>
