@@ -1,7 +1,4 @@
 ﻿using DepartmentModule.DTOs;
-using DepartmentModule.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace DepartmentModule.Services
 {
@@ -14,6 +11,6 @@ namespace DepartmentModule.Services
         Task CreateDepartmentAsync(DepartmentDto department);
         Task UpdateDepartmentAsync(DepartmentDto department);
         Task DeleteDepartmentAsync(int departmentId);
-       Task<DepartmentDto> GetDepartmentDeatilsAsync(int id);
+        Task<DepartmentDto> GetDepartmentDeatilsAsync(int id);
     }
 }

@@ -1,10 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ReminderModule.Models
 {
@@ -13,6 +7,6 @@ namespace ReminderModule.Models
         public ReminderDbContext(DbContextOptions<ReminderDbContext> options) : base(options) { }
 
         public DbSet<Reminder> Reminders { get; set; }
-     
+
     }
 }

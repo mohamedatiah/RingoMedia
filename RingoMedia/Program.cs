@@ -2,20 +2,18 @@ using DepartmentModule.Models;
 using DepartmentModule.Repositories;
 using DepartmentModule.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using ReminderModule.Models;
 using ReminderModule.Repositories;
 using ReminderModule.Services;
 using RingoMedia.Midelware;
-using RingoMedia.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DepartmentDbContext>(options =>
-     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), 
-     sqlServerOptions =>sqlServerOptions.CommandTimeout(180).EnableRetryOnFailure()));
+     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+     sqlServerOptions => sqlServerOptions.CommandTimeout(180).EnableRetryOnFailure()));
 
 builder.Services.AddDbContext<ReminderDbContext>(options =>
      options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

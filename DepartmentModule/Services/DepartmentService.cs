@@ -1,6 +1,5 @@
 ﻿using DepartmentModule.DTOs;
 using DepartmentModule.Extensions;
-using DepartmentModule.Models;
 using DepartmentModule.Repositories;
 using DepartmentModule.Services;
 
@@ -15,7 +14,7 @@ public class DepartmentService : IDepartmentService
 
     public async Task<IEnumerable<DepartmentDto>> GetSubDepartmentsAsync(int departmentId)
     {
-        var entity= await _departmentRepository.GetSubDepartmentsAsync(departmentId);
+        var entity = await _departmentRepository.GetSubDepartmentsAsync(departmentId);
         return entity.Select(a => a.ToDto());
     }
 
@@ -25,7 +24,8 @@ public class DepartmentService : IDepartmentService
         {
             var entity = await _departmentRepository.GetParentDepartmentsAsync(departmentId);
             return entity.Select(a => a.ToDto());
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             return null;
         }
@@ -62,7 +62,7 @@ public class DepartmentService : IDepartmentService
 
     public async Task<IEnumerable<DepartmentDto>> GetAllAsync()
     {
-        var entity= await _departmentRepository.GetAllAsync();
+        var entity = await _departmentRepository.GetAllAsync();
         return entity.Select(a => a.ToDto());
     }
     public async Task<DepartmentDto> GetDepartmentDeatilsAsync(int id)
@@ -78,7 +78,8 @@ public class DepartmentService : IDepartmentService
             }
             department.SubDepartments = sub.ToList();
             return department.ToDto();
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             return new DepartmentDto();
         }

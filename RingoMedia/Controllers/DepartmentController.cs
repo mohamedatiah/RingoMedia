@@ -1,8 +1,6 @@
 ﻿using DepartmentModule.DTOs;
-using DepartmentModule.Models;
 using DepartmentModule.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 public class DepartmentController : Controller
 {
@@ -19,10 +17,10 @@ public class DepartmentController : Controller
         return View(departments);
     }
 
-    public async Task<IActionResult>Create()
+    public async Task<IActionResult> Create()
     {
-        var departments =await _departmentService.GetAllAsync();
-        ViewBag.Departments = departments?.Where(a=>a.ParentDepartmentId==null).ToList();
+        var departments = await _departmentService.GetAllAsync();
+        ViewBag.Departments = departments?.Where(a => a.ParentDepartmentId == null).ToList();
         return View();
     }
 
@@ -54,7 +52,7 @@ public class DepartmentController : Controller
     {
         var departments = await _departmentService.GetAllAsync();
         var department = await _departmentService.GetDepartmentByIdAsync(id);
-        ViewBag.Departments = departments?.Where(a => a.ParentDepartmentId == null|| a.ParentDepartmentId==department?.ParentDepartmentId).ToList();
+        ViewBag.Departments = departments?.Where(a => a.ParentDepartmentId == null || a.ParentDepartmentId == department?.ParentDepartmentId).ToList();
         return View(department);
     }
     [HttpPost]
@@ -72,7 +70,7 @@ public class DepartmentController : Controller
                 }
             }
             await _departmentService.UpdateDepartmentAsync(departmentDto);
-           var departments = await _departmentService.GetAllAsync();
+            var departments = await _departmentService.GetAllAsync();
             ViewBag.Departments = departments?.Where(a => a.ParentDepartmentId == null).ToList();
             return RedirectToAction(nameof(Index));
         }

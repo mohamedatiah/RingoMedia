@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ReminderModule.DTOs;
-using ReminderModule.Models;
 using ReminderModule.Services;
-using System.Threading.Tasks;
 
 public class ReminderController : Controller
 {
@@ -36,9 +34,9 @@ public class ReminderController : Controller
         return View(reminderDto);
     }
 
-    public async Task<IActionResult>Edit(int id)
+    public async Task<IActionResult> Edit(int id)
     {
-        var reminder =await _reminderService.GetReminderByIdAsync(id);
+        var reminder = await _reminderService.GetReminderByIdAsync(id);
         if (reminder == null)
         {
             return NotFound();
@@ -52,7 +50,7 @@ public class ReminderController : Controller
     {
         if (ModelState.IsValid)
         {
-          await _reminderService.UpdateReminderAsync(reminder);
+            await _reminderService.UpdateReminderAsync(reminder);
             return RedirectToAction("Index");
         }
         return View(reminder);
@@ -60,7 +58,7 @@ public class ReminderController : Controller
 
     public async Task<IActionResult> Delete(int id)
     {
-        var reminder =await _reminderService.GetReminderByIdAsync(id);
+        var reminder = await _reminderService.GetReminderByIdAsync(id);
         if (reminder == null)
         {
             return NotFound();
@@ -72,7 +70,7 @@ public class ReminderController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
-     await   _reminderService.DeleteReminderAsync(id);
+        await _reminderService.DeleteReminderAsync(id);
         return RedirectToAction("Index");
     }
 }
