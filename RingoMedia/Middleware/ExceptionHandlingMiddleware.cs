@@ -27,7 +27,7 @@
                 var errorResponse = new
                 {
                     StatusCode = context.Response.StatusCode,
-                    Message = "An unexpected error occurred. Please try again later."
+                    Message = ex.Message
                 };
 
                 await context.Response.WriteAsJsonAsync(errorResponse);

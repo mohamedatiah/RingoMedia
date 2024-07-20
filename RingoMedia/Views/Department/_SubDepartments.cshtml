@@ -1,0 +1,23 @@
+﻿@using DepartmentModule.DTOs
+
+@model IEnumerable<DepartmentDto>
+
+@if (!Model.Any())
+{
+    <div>No sub-departments</div>
+}
+else
+{
+    <ul>
+        @foreach (var department in Model)
+        {
+            <li>
+                <span class="expand-icon" data-id="@department.Id">▶</span>
+                @department.Name
+                <a href="@Url.Action("Edit", "Departments", new { id = department.Id })" class="edit-icon">✎</a>
+                <a href="@Url.Action("Delete", "Departments", new { id = department.Id })" class="delete-icon">🗑</a>
+                <div class="sub-departments-container" data-id="@department.Id"></div>
+            </li>
+        }
+    </ul>
+}

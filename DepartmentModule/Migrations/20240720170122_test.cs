@@ -5,7 +5,7 @@
 namespace DepartmentModule.Migrations
 {
     /// <inheritdoc />
-    public partial class departmentUpadte : Migration
+    public partial class test : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,6 +18,7 @@ namespace DepartmentModule.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LogoName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ParentDepartmentId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

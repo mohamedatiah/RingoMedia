@@ -1,12 +1,46 @@
 ﻿@using DepartmentModule.DTOs
 @model IEnumerable<DepartmentDto>
-<h2>Departments</h2>
-<a href="/Department/Create">Create New</a>
+
+<h1>Departments</h1>
 <ul>
     @foreach (var department in Model)
     {
         <li>
-            <a href="/Department/Details/@department.Id">@department.Name</a>
+            <span class="expand-icon" data-id="@department.Id">▶</span>
+            @department.Name
+            <a href="@Url.Action("Edit", "Department", new { id = department.Id })" class="edit-icon">✎</a>
+            <a href="@Url.Action("Delete", "Department", new { id = department.Id })" class="delete-icon">🗑</a>
+            <div class="sub-departments-container" data-id="@department.Id"></div>
         </li>
     }
 </ul>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.expand-icon').click(function() {
+                var $this = $(this);
+                var departmentId = $this.data('id');
+                var $container = $('.sub-departments-container[data-id="' + departmentId + '"]');
+
+                if ($container.is(':empty')) {
+                    $.ajax({
+                        url: '@Url.Action("GetSubDepartments", "Departments")',
+                        data: { id: departmentId },
+                        success: function (data) {
+                            $container.html(data);
+                            $this.text('▼');
+                        },
+                        error: function () {
+                            $container.html('<div>Error loading sub-departments</div>');
+                        }
+                    });
+                } else {
+                    $container.toggle();
+                    $this.text($container.is(':visible') ? '▼' : '▶');
+                }
+            });
+        });
+    </script>
+}

@@ -28,11 +28,21 @@
             <option value="">Select Parent Department</option>
             @if (ViewBag.Departments != null)
             {
-                @foreach (var department in ViewBag.Departments as IEnumerable<DepartmentDto>)
+                @foreach (var department in ViewBag.Departments)
                 {
-                    <option value="@department.Id">
-                        @department.Name
-                    </option>
+                    var selected = department.Id == Model.ParentDepartmentId;
+                    @if (selected)
+                    {
+                        <option value="@department.Id" selected>
+                            @department.Name
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@department.Id">
+                            @department.Name
+                        </option>
+                    }
                 }
             }
             else

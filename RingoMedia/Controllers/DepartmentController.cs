@@ -45,6 +45,11 @@ public class DepartmentController : Controller
         }
         return View(departmentDto);
     }
+    public async Task<IActionResult> GetSubDepartments(int id)
+    {
+        var subDepartments = await _departmentService.GetSubDepartmentsAsync(id);
+        return PartialView("_SubDepartments", subDepartments);
+    }
     public async Task<IActionResult> Edit(int id)
     {
         var departments = await _departmentService.GetAllAsync();
